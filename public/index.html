@@ -1,0 +1,39 @@
+<html>
+<head>
+  <script type="text/javascript" src="//player.wowza.com/player/latest/wowzaplayer.min.js"></script>
+</head>
+
+<body>
+<div id="playerElement" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
+<script type="text/javascript">
+  var myPlayer = WowzaPlayer.create('playerElement',
+    {
+      "license":"XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX",
+      "sources": [
+        {"sourceURL":"http://IP:1935/vod/doesnotexist.mp4/playlist.m3u8"},
+        {"sourceURL":"http://IP:1935/vod/sample.mp4/playlist.m3u8"}
+      ]
+    }
+  );
+
+  //Print to console for attempts, successes, and failures
+  function playbackAttemptListener( playbackEvent ){
+    console.log('Attempt: ' + playbackEvent.url);
+  }
+ 
+  function playbackSuccessListener( playbackEvent ){
+    console.log('Success: ' + playbackEvent.url);
+  }
+
+  function playbackFailureListener( playbackEvent ){
+   console.log('Failure: ' + playbackEvent.url);
+  }
+
+  //Listen for playback attempts, successes, and failures and execute callback functions above.
+  myPlayer.onPlaybackAttempt(playbackAttemptListener);
+  myPlayer.onPlaybackSuccess(playbackSuccessListener);
+  myPlayer.onPlaybackFailure(playbackFailureListener);
+
+</script>
+<body>
+</html>
